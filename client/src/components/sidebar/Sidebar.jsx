@@ -1,14 +1,14 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import './sidebar.css';
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import "./sidebar.css";
 
 export default function Sidebar() {
   const [cats, setCats] = useState([]);
 
   useEffect(() => {
     const getCats = async () => {
-      const res = await axios.get('http://localhost:5000/categories');
+      const res = await axios.get("http://localhost:5000/categories");
       setCats(res.data);
     };
     getCats();
@@ -21,10 +21,7 @@ export default function Sidebar() {
           src="https://i.pinimg.com/236x/1e/3f/58/1e3f587572a7a7b20bbf1828595a1786--holiday-party-themes-holiday-gift-guide.jpg"
           alt=""
         />
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate qui
-          necessitatibus nostrum illum reprehenderit.
-        </p>
+        <p>It is beautiful blog</p>
       </div>
       <div className="sidebarItem">
         <span className="sidebarTitle">CATEGORIES</span>
@@ -39,10 +36,34 @@ export default function Sidebar() {
       <div className="sidebarItem">
         <span className="sidebarTitle">FOLLOW US</span>
         <div className="sidebarSocial">
-          <i className="sidebarIcon fab fa-facebook-square"></i>
-          <i className="sidebarIcon fab fa-twitter-square"></i>
-          <i className="sidebarIcon fab fa-pinterest-square"></i>
-          <i className="sidebarIcon fab fa-instagram-square"></i>
+          <a
+            href="https://twitter.com/envato"
+            class="social-link"
+            target="_blank"
+          >
+            <i className="sidebarIcon fab fa-facebook-square"></i>
+          </a>
+          <a
+            href="https://twitter.com/envato"
+            class="social-link"
+            target="_blank"
+          >
+            <i className="sidebarIcon fab fa-twitter-square"></i>
+          </a>
+          <a
+            href="https://twitter.com/envato"
+            class="social-link"
+            target="_blank"
+          >
+            <i className="sidebarIcon fab fa-pinterest-square"></i>
+          </a>
+          <a
+            href="https://twitter.com/envato"
+            class="social-link"
+            target="_blank"
+          >
+            <i className="sidebarIcon fab fa-instagram-square"></i>
+          </a>
         </div>
       </div>
     </div>

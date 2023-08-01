@@ -1,20 +1,20 @@
-import Home from './pages/home/Home';
-import TopBar from './components/topbar/TopBar';
-import BlogDetails from './pages/BlogDetails/BlogDetails';
-import CreateBlog from './pages/CreateBlog/CreateBlog';
-import Settings from './pages/settings/Settings';
-import Login from './pages/login/Login';
-import Register from './pages/register/Register';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import { useContext } from 'react';
-import { Context } from './context/Context';
+import Home from "./pages/home/Home";
+import TopBar from "./components/NavBar/NavBar";
+import BlogDetails from "./pages/BlogDetails/BlogDetails";
+import CreateBlog from "./pages/CreateBlog/CreateBlog";
+import Settings from "./pages/settings/Settings";
+import Login from "./pages/login/Login";
+import Register from "./pages/register/Register";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { useContext } from "react";
+import { Context } from "./context/Context";
 
 function App() {
   const { user } = useContext(Context);
   return (
     <>
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <div style={{ width: '1024px' }}>
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <div style={{ width: "1024px" }}>
           <Router>
             <TopBar />
             <Switch>

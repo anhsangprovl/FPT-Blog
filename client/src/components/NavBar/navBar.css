@@ -1,4 +1,4 @@
-.top {
+.nav {
   width: 100%;
   height: 50px;
   background-color: white;
@@ -9,27 +9,32 @@
   font-family: "Josefin Sans", sans-serif;
   z-index: 999;
 }
+.navLeft img {
+  height: auto;
+  max-width: 50%;
+  animation: searchLights 1.5s ease-out 0s infinite;
+}
 
-.topLeft,
-.topRight {
+.navLeft,
+.navRight {
   flex: 3;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.topCenter {
+.navCenter {
   flex: 6;
 }
 
-.topIcon {
+.navIcon {
   font-size: 20px;
   margin-right: 10px;
   color: #444;
   cursor: pointer;
 }
 
-.topImg {
+.navImg {
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -37,7 +42,7 @@
   cursor: pointer;
 }
 
-.topList {
+.navList {
   display: flex;
   justify-content: center;
   margin: 0;
@@ -45,14 +50,16 @@
   list-style: none;
 }
 
-.topListItem {
-  margin-right: 20px;
-  font-size: 18px;
-  font-weight: 300;
+.navListItem {
+  padding: 6px 12px;
+  border-radius: 1000px;
+  margin: 2px;
   cursor: pointer;
 }
-
-.topSearchIcon {
+.navListItem:hover {
+  background-color: #535a60;
+}
+.navSearchIcon {
   font-size: 18px;
   color: #666;
   cursor: pointer;
