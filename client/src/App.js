@@ -1,5 +1,5 @@
 import Home from './pages/home/Home';
-import TopBar from './components/topbar/TopBar';
+import Navbar from './components/navbar/Navbar';
 import BlogDetails from './pages/BlogDetails/BlogDetails';
 import CreateBlog from './pages/CreateBlog/CreateBlog';
 import Settings from './pages/settings/Settings';
@@ -13,10 +13,10 @@ function App() {
   const { user } = useContext(Context);
   return (
     <>
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
+      <div style={{ display: 'flex', justifyContent: 'center'}}>
         <div style={{ width: '1024px' }}>
           <Router>
-            <TopBar />
+            <Navbar />
             <Switch>
               <Route exact path="/">
                 <Home />
