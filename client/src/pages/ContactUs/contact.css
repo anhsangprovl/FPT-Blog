@@ -1,0 +1,12 @@
+.contact {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   gap: 15px;
+   height: 60vh;
+}
+
+h2 {
+   padding: 100px 0 30px 0;
+}

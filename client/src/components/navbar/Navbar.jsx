@@ -13,7 +13,7 @@ export default function Navbar() {
   return (
     <div className="nav">
       <div className="nav-left">
-      <h2>FBLOG</h2>
+        <h3 className="logo">life<span className="S">S</span></h3>
       </div>
       <div className="nav-center">
         <ul className="nav-list">
@@ -23,12 +23,12 @@ export default function Navbar() {
             </Link>
           </li>
           <li className="nav-listItem">
-            <Link className="link" to="/">
+            <Link className="link" to="/about">
               ABOUT
             </Link>
           </li>
           <li className="nav-listItem">
-            <Link className="link" to="/">
+            <Link className="link" to="/contact">
               CONTACT
             </Link>
           </li>
@@ -49,19 +49,19 @@ export default function Navbar() {
           </Link>
         ) : (
           <ul className="nav-list">
-            <li className="nav-listItem nav-listItem-button">
+            <li className="nav-listItem login">
               <Link className="link" to="/login">
-                LOGIN
+                Log in
               </Link>
             </li>
             <li className="nav-listItem nav-listItem-button">
-              <Link className="link" to="/register">
-                REGISTER
+              <Link className="link" to="/signup">
+                Sign up
               </Link>
             </li>
           </ul>
         )}
-        <i className="nav-searchIcon fas fa-search"></i>
+        {/* <i className="nav-searchIcon fas fa-search"></i> */}
       </div>
     </div>
   );

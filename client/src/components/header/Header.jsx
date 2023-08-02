@@ -16,8 +16,8 @@ export default function Header() {
       <div className="header-post">
         <div className="post-content">
           <span className="post-date">20/10/2023</span>
-          <h2>Title OF POST</h2>
-          <span className="post-desc">Description here</span>
+          <span className="post-title">Trending web & landing page designs in 202Trending web & landing page designTrending web & landing page designs in 202Trending web & landing page design</span>
+          <span className="post-desc">Description here Description here Description here Description here Description hereDescription hereDescription hereDescription hereDescription hereDescription hereDescription hereDescription hereDescription here</span>
         </div>
       </div>
     </div>

@@ -25,6 +25,17 @@
   justify-content: flex-start;
 }
 
+.logo {
+  font-size: 25px;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+.S {
+  font-size: 25px;
+  color: rgba(0, 0, 0, 0.429);
+}
+
 .nav-center {
   flex: 6;
 }
@@ -52,6 +63,10 @@
   cursor: pointer;
 }
 
+.login {
+  padding: 6px;
+}
+
 .nav-listItem.nav-listItem-button {
   padding: 6px;
   background-color: #2e2e2e;
@@ -61,8 +76,9 @@
 }
 
 .nav-listItem.nav-listItem-button:hover {
-  background-color: #e2dddd;
-  color: #2e2e2e;
+  background-color: white;
+  color: black;
+  border: 1px solid;
 }
 
 .nav-searchIcon {
