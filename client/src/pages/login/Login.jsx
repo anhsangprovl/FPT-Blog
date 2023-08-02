@@ -24,32 +24,30 @@ export default function Login() {
   };
 
   return (
-    <div className="login">
-      <span className="loginTitle">Login</span>
-      <form className="loginForm" onSubmit={handleSubmit}>
-        <label>Username</label>
+    <div className="login-page">
+      <h1 className="login-title">Login</h1>
+      <form onSubmit={handleSubmit}>
         <input
           type="text"
-          className="loginInput"
+          id="username"
+          name="username"
           placeholder="Enter your username..."
           ref={userRef}
         />
-        <label>Password</label>
         <input
           type="password"
-          className="loginInput"
+          id="password"
+          name="password"
           placeholder="Enter your password..."
           ref={passwordRef}
         />
-        <button className="loginButton" type="submit" disabled={isFetching}>
+        <button className="login-btn" type="submit" disabled={isFetching}>
           Login
         </button>
+        <span>
+          Don't you have an account? <Link to="/register">Signup</Link>
+        </span>
       </form>
-      <button className="loginRegisterButton">
-        <Link className="link" to="/register">
-          Register
-        </Link>
-      </button>
     </div>
   );
 }

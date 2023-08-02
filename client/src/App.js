@@ -8,6 +8,8 @@ import Register from './pages/register/Register';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import { useContext } from 'react';
 import { Context } from './context/Context';
+import Navbar from './components/navbar/navbar';
+import Footer from './components/footer/Footer';
 
 function App() {
   const { user } = useContext(Context);
@@ -16,7 +18,8 @@ function App() {
       <div style={{ display: 'flex', justifyContent: 'center' }}>
         <div style={{ width: '1024px' }}>
           <Router>
-            <TopBar />
+            <Navbar />
+            {/* <TopBar /> */}
             <Switch>
               <Route exact path="/">
                 <Home />
@@ -36,6 +39,7 @@ function App() {
           </Router>
         </div>
       </div>
+      <Footer />
     </>
   );
 }

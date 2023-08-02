@@ -5,6 +5,11 @@
 .settingsWrapper {
   flex: 9;
   padding: 20px;
+  margin-top: 60px;
+  border-radius: 10px;
+  background: #ffffff;
+  box-shadow:  40px 40px 80px #d7d3d3,
+             -40px -40px 80px #ffffff;
 }
 
 .settingsTitle {
@@ -27,18 +32,20 @@
 
 .settingsForm {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .settingsPP {
   display: flex;
   align-items: center;
   margin: 10px 0;
+  flex: 5;
 }
 
 .settingsPP > img {
-  width: 70px;
-  height: 70px;
+  width: 250px;
+  height: 250px;
   border-radius: 20px;
   object-fit: cover;
 }
@@ -56,12 +63,12 @@
   cursor: pointer;
 }
 
-.settingsForm > label {
+.profile-info > label {
   font-size: 20px;
   margin-top: 20px;
 }
 
-.settingsForm > input {
+.profile-info > input {
   color: gray;
   margin: 10px 0;
   height: 30px;
@@ -80,3 +87,13 @@
     margin-top: 20px;
     cursor: pointer;
 }
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+} 
+
+
+
+

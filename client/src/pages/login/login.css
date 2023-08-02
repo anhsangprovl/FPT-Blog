@@ -1,60 +1,48 @@
-.login {
-  height: calc(100vh - 50px);
+.login-page {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(
-      rgba(255, 255, 255, 0.5),
-      rgba(255, 255, 255, 0.5)
-    ),
-    url("https://images.pexels.com/photos/768473/pexels-photo-768473.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500");
-  background-size: cover;
+  height: 60vh;
 }
 
-.loginTitle {
-  font-size: 50px;
+.login-title {
+  font-weight: 400;
+  font-size: 20px;
+  color: black ;
+  margin-bottom: 20px;
 }
 
-.loginForm {
-  margin-top: 20px;
+form {
   display: flex;
   flex-direction: column;
-}
-
-.loginForm > label {
-  margin: 10px 0;
-}
-
-.loginInput {
-  padding: 10px;
+  padding: 50px;
   background-color: white;
-  border: none;
+  width: 200px;
+  gap: 20px;
 }
 
-.loginButton {
-  margin-top: 20px;
-  cursor: pointer;
-  background-color: lightcoral;
-  border: none;
-  color: white;
-  border-radius: 10px;
+input {
   padding: 10px;
-}
-
-.loginButton:disabled{
-  cursor: not-allowed;
-  background-color: rgb(252, 173, 173);
-}
-
-.loginRegisterButton {
-  position: absolute;
-  top: 60px;
-  right: 20px;
-  background-color: teal;
-  cursor: pointer;
   border: none;
+  border-bottom: 1px solid gray;
+}
+
+.login-btn {
   padding: 10px;
+  border: none;
+  background-color: black;
   color: white;
-  border-radius: 10px;
+}
+
+.login-btn:hover {
+  background-color: white;
+  color: black;
+  border: 1px solid;
+  cursor: pointer;
+}
+
+span {
+  font-size: 12px;
+  text-align: center;
 }

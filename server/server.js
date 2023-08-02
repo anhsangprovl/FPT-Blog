@@ -6,6 +6,7 @@ const authRoute = require('./routes/auth');
 const userRoute = require('./routes/users');
 const postRoute = require('./routes/posts');
 const categoryRoute = require('./routes/categories');
+const commentRoute = require('./routes/comments');
 const multer = require('multer');
 const path = require('path');
 const cors = require('cors');
@@ -54,6 +55,7 @@ app.use('/auth', authRoute);
 app.use('/users', userRoute);
 app.use('/posts', postRoute);
 app.use('/categories', categoryRoute);
+app.use('/comments', commentRoute);
 
 app.listen('5000', () => {
   console.log('Backend is running.');

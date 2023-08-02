@@ -1,55 +1,48 @@
-.register {
-  height: calc(100vh - 50px);
+.auth {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(
-      rgba(255, 255, 255, 0.5),
-      rgba(255, 255, 255, 0.5)
-    ),
-    url("https://images.pexels.com/photos/317355/pexels-photo-317355.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
-  background-size: cover;
+  height: 60vh;
 }
 
-.registerTitle {
-  font-size: 50px;
+.signup-title {
+  font-weight: 400;
+  font-size: 20px;
+  color: black ;
+  margin-bottom: 20px;
 }
 
-.registerForm {
-  margin-top: 20px;
+form {
   display: flex;
   flex-direction: column;
-}
-
-.registerForm > label {
-  margin: 10px 0;
-}
-
-.registerInput {
-  padding: 10px;
+  padding: 50px;
   background-color: white;
-  border: none;
+  width: 200px;
+  gap: 20px;
 }
 
-.registerButton {
-  margin-top: 20px;
-  cursor: pointer;
-  background-color: teal;
-  border: none;
-  color: white;
-  border-radius: 10px;
+input {
   padding: 10px;
+  border: none;
+  border-bottom: 1px solid gray;
 }
 
-.registerLoginButton {
-  position: absolute;
-  top: 60px;
-  right: 20px;
-  background-color: lightcoral;
-  cursor: pointer;
-  border: none;
+.signup-btn {
   padding: 10px;
+  border: none;
+  background-color: black;
   color: white;
-  border-radius: 10px;
+}
+
+.signup-btn:hover {
+  background-color: white;
+  color: black;
+  border: 1px solid;
+  cursor: pointer;
+}
+
+span{
+  font-size: 12px;
+  text-align: center;
 }

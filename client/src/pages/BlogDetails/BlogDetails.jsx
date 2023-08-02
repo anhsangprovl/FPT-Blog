@@ -19,7 +19,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ReviewsIcon from '@mui/icons-material/Reviews';
 import TurnedInNotIcon from '@mui/icons-material/TurnedInNot';
 import ShareIcon from '@mui/icons-material/Share';
-
+import FileUploadIcon from '@mui/icons-material/FileUpload';
 import Textarea from '@mui/joy/Textarea';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
@@ -37,6 +37,11 @@ import { useContext, useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Context } from '../../context/Context';
+
+import Comments from './Comment/Comments';
+
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 const BlogDetails = () => {
   const location = useLocation();
   const path = location.pathname.split('/')[2];
@@ -46,7 +51,8 @@ const BlogDetails = () => {
   const [title, setTitle] = useState('');
   const [desc, setDesc] = useState('');
   const [updateMode, setUpdateMode] = useState(false);
-
+  const [countComment1, setCountComment1] = useState(0);
+  const [file, setFile] = useState(null);
   const getText = (html) => {
     const doc = new DOMParser().parseFromString(html, 'text/html');
     return doc.body.textContent;
@@ -61,6 +67,10 @@ const BlogDetails = () => {
     getPost();
   }, [path]);
 
+  const countComment = (countComment) => {
+    setCountComment1(countComment);
+  };
+
   const handleDelete = async () => {
     try {
       await axios.delete(`http://localhost:5000/posts/${post._id}`, {
@@ -72,15 +82,27 @@ const BlogDetails = () => {
 
   const handleUpdate = async () => {
     try {
-      await axios.put(`http://localhost:5000/posts/${post._id}`, {
+      const newPost = {
         username: user.username,
         title,
         desc,
-      });
+      };
+      if (file) {
+        const data = new FormData();
+        const filename = Date.now() + file.name;
+        data.append('name', filename);
+        data.append('file', file);
+        newPost.photo = filename;
+        try {
+          await axios.post('http://localhost:5000/upload', data);
+        } catch (err) {}
+      }
+      await axios.put(`http://localhost:5000/posts/${post._id}`, newPost);
       setUpdateMode(false);
+      window.location.reload();
     } catch (err) {}
   };
-
+  console.log(post.categories);
   return (
     <Box sx={{ padding: '20px', marginTop: '30px' }}>
       <Box sx={{}}>
@@ -91,6 +113,7 @@ const BlogDetails = () => {
             backgroundColor: '#FFE3E3',
             fontSize: '12px',
             fontWeight: '700',
+
             marginBottom: '20px',
             borderRadius: 10,
             padding: '5px 10px',
@@ -99,7 +122,7 @@ const BlogDetails = () => {
               borderRadius: 10,
             },
           }}>
-          Jewelry
+          {post.categories}
         </Button>
         <Grid container spacing={8}>
           <Grid item xs={10}>
@@ -117,6 +140,7 @@ const BlogDetails = () => {
                 variant="outlined"
                 value={title}
                 autoFocus
+                fullWidth
                 onChange={(e) => setTitle(e.target.value)}
               />
             )}
@@ -188,23 +212,7 @@ const BlogDetails = () => {
           </Grid>
           <Grid item xs={4}>
             <Grid container spacing={2}>
-              <Grid item xs={3}>
-                <Button
-                  color="inherit"
-                  sx={{
-                    borderRadius: 10,
-                    padding: '5px 20px',
-                    marginTop: '5px',
-                    '&:hover': {
-                      backgroundColor: 'pink',
-                      borderRadius: 10,
-                    },
-                  }}
-                  startIcon={<FavoriteBorderIcon />}>
-                  50
-                </Button>
-              </Grid>
-              <Grid item xs={3}>
+              <Grid item xs={4}>
                 <Button
                   color="inherit"
                   sx={{
@@ -217,28 +225,15 @@ const BlogDetails = () => {
                     },
                   }}
                   startIcon={<ReviewsIcon />}>
-                  100
+                  {countComment1}
                 </Button>
               </Grid>
-              <Grid item xs={3}>
+              <Grid item xs={4}>
                 <IconButton aria-label="delete">
                   <TurnedInNotIcon />
                 </IconButton>
-                {/* <Button
-                  color="inherit"
-                  sx={{
-                    borderRadius: 10,
-                    padding: '5px 20px',
-                    '&:hover': {
-                      backgroundColor: 'pink',
-                      borderRadius: 10,
-                    },
-                  }}
-                  startIcon={<FavoriteBorderIcon />}>
-                  50
-                </Button> */}
               </Grid>
-              <Grid item xs={3}>
+              <Grid item xs={4}>
                 <IconButton aria-label="delete">
                   <ShareIcon />
                 </IconButton>
@@ -249,182 +244,78 @@ const BlogDetails = () => {
       </Box>
 
       <Box sx={{ flexGrow: 1, marginTop: '20px', borderRadius: '50px' }}>
-        {post.photo && (
-          <img
-            alt="background"
-            src={PF + post.photo}
-            width="100%"
-            height="50%"
-          />
+        {updateMode ? (
+          <>
+            {file && (
+              <img
+                src={URL.createObjectURL(file)}
+                alt=""
+                width="100%"
+                height={300}
+                style={{ objectFit: 'cover' }}
+              />
+            )}
+            <label htmlFor="fileInput">
+              <FileUploadIcon color="primary" size="large" />
+            </label>
+            <input
+              type="file"
+              id="fileInput"
+              style={{ display: 'none' }}
+              onChange={(e) => setFile(e.target.files[0])}
+            />
+            &nbsp; Upload Image
+          </>
+        ) : (
+          post.photo && (
+            <img
+              alt="background"
+              src={PF + post.photo}
+              width="100%"
+              height="50%"
+            />
+          )
         )}
       </Box>
 
       <Box sx={{ flexGrow: 1, marginTop: '40px' }}>
         {updateMode ? (
-          <Textarea
-            placeholder="Add to discussion"
-            required
-            minRows={10}
+          <ReactQuill
+            className="editor"
+            theme="snow"
             value={desc}
-            sx={{ mb: 1 }}
-            onChange={(e) => setDesc(e.target.value)}
+            onChange={setDesc}
+            style={{ height: '250px', marginBottom: '20px' }}
           />
         ) : (
+          // <Textarea
+          //   placeholder="Add to discussion"
+          //   required
+          //   minRows={10}
+          //   value={desc}
+          //   sx={{ mb: 1 }}
+          //   onChange={(e) => setDesc(e.target.value)}
+          // />
           <Typography
             dangerouslySetInnerHTML={{
               __html: DOMPurify.sanitize(post.desc),
             }}></Typography>
         )}
         {updateMode && (
-          <Button variant="outlined" color="primary" onClick={handleUpdate}>
+          <Button
+            variant="outlined"
+            color="primary"
+            sx={{ marginTop: '30px' }}
+            onClick={handleUpdate}>
             Update
           </Button>
         )}
         <Divider sx={{ marginTop: '40px' }} />
       </Box>
 
-      <Box sx={{ flexGrow: 1, marginTop: '40px' }}>
-        <Typography variant="h5" sx={{ fontWeight: 600, marginBottom: '20px' }}>
-          Comments (10)
-        </Typography>
-        <form
-          onSubmit={(event) => {
-            event.preventDefault();
-          }}>
-          <Textarea
-            placeholder="Add to discussion"
-            required
-            minRows={4}
-            sx={{ mb: 1 }}
-          />
+      <Comments post={post} countComment={countComment} />
 
-          <Button
-            type="submit"
-            variant="contained"
-            sx={{ borderRadius: 10, marginTop: '10px' }}>
-            Submit
-          </Button>
-        </form>
-      </Box>
-
-      <Box sx={{ flexGrow: 1, marginTop: '40px' }}>
-        <Box sx={{ marginBottom: '20px' }}>
-          <Grid container>
-            <Grid item xs={0.8} sx={{ marginTop: '10px' }}>
-              <Avatar sx={{ bgColor: 'green' }}>S</Avatar>
-            </Grid>
-            <Grid item xs={11.2}>
-              <Box
-                sx={{
-                  backgroundColor: '#f5f5f5',
-                  border: '5px solid',
-                  borderColor: '#f5f5f5',
-                  padding: '15px',
-                  borderRadius: 5,
-                }}>
-                <Grid container>
-                  <Grid item sx={2}>
-                    <Typography sx={{ fontSize: 16, fontWeight: 600 }}>
-                      Truelock Alric
-                    </Typography>
-                  </Grid>
-                  <Grid item sx={10}>
-                    {' '}
-                    <Typography
-                      sx={{ fontSize: 14 }}
-                      color="text.secondary"
-                      gutterBottom>
-                      {`  `}&nbsp; &nbsp; May 20, 2021
-                    </Typography>
-                  </Grid>
-                </Grid>
-                <Typography variant="body2" sx={{ marginTop: '10px' }}>
-                  Praesent id massa id nisl venenatis lacinia. Aenean sit amet
-                  justo. Morbi ut odio.
-                </Typography>
-              </Box>
-            </Grid>
-          </Grid>
-        </Box>
-        <Box sx={{ marginBottom: '20px' }}>
-          <Grid container>
-            <Grid item xs={0.8} sx={{ marginTop: '10px' }}>
-              <Avatar sx={{ bgColor: 'green' }}>S</Avatar>
-            </Grid>
-            <Grid item xs={11.2}>
-              <Box
-                sx={{
-                  backgroundColor: '#f5f5f5',
-                  border: '5px solid',
-                  borderColor: '#f5f5f5',
-                  padding: '15px',
-                  borderRadius: 5,
-                }}>
-                <Grid container>
-                  <Grid item sx={2}>
-                    <Typography sx={{ fontSize: 16, fontWeight: 600 }}>
-                      Truelock Alric
-                    </Typography>
-                  </Grid>
-                  <Grid item sx={10}>
-                    {' '}
-                    <Typography
-                      sx={{ fontSize: 14 }}
-                      color="text.secondary"
-                      gutterBottom>
-                      {`  `}&nbsp; &nbsp; May 20, 2021
-                    </Typography>
-                  </Grid>
-                </Grid>
-                <Typography variant="body2" sx={{ marginTop: '10px' }}>
-                  Praesent id massa id nisl venenatis lacinia. Aenean sit amet
-                  justo. Morbi ut odio.
-                </Typography>
-              </Box>
-            </Grid>
-          </Grid>
-        </Box>
-        <Box sx={{ marginBottom: '20px' }}>
-          <Grid container>
-            <Grid item xs={0.8} sx={{ marginTop: '10px' }}>
-              <Avatar sx={{ bgColor: 'green' }}>S</Avatar>
-            </Grid>
-            <Grid item xs={11.2}>
-              <Box
-                sx={{
-                  backgroundColor: '#f5f5f5',
-                  border: '5px solid',
-                  borderColor: '#f5f5f5',
-                  padding: '15px',
-                  borderRadius: 5,
-                }}>
-                <Grid container>
-                  <Grid item sx={2}>
-                    <Typography sx={{ fontSize: 16, fontWeight: 600 }}>
-                      Truelock Alric
-                    </Typography>
-                  </Grid>
-                  <Grid item sx={10}>
-                    {' '}
-                    <Typography
-                      sx={{ fontSize: 14 }}
-                      color="text.secondary"
-                      gutterBottom>
-                      {`  `}&nbsp; &nbsp; May 20, 2021
-                    </Typography>
-                  </Grid>
-                </Grid>
-                <Typography variant="body2" sx={{ marginTop: '10px' }}>
-                  Praesent id massa id nisl venenatis lacinia. Aenean sit amet
-                  justo. Morbi ut odio.
-                </Typography>
-              </Box>
-            </Grid>
-          </Grid>
-        </Box>
-      </Box>
-
-      <Box sx={{ flexGrow: 1, marginTop: '100px' }}>
+      {/* <Box sx={{ flexGrow: 1, marginTop: '100px' }}>
         <Typography
           variant="h4"
           color="initial"
@@ -523,6 +414,7 @@ const BlogDetails = () => {
                 </CardActions>
               </Card>
             </Grid>
+
             <Grid item>
               {' '}
               <Card
@@ -797,7 +689,7 @@ const BlogDetails = () => {
             </Grid>
           </Grid>
         </Box>
-      </Box>
+      </Box> */}
     </Box>
   );
 };
