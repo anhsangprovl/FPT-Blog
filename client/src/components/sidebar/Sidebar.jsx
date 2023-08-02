@@ -18,7 +18,7 @@ export default function Sidebar() {
       <div className="sidebarItem">
         <span className="sidebarTitle">ABOUT ME</span>
         <img
-          src="https://i.pinimg.com/236x/1e/3f/58/1e3f587572a7a7b20bbf1828595a1786--holiday-party-themes-holiday-gift-guide.jpg"
+          src="https://cheerup.theme-sphere.com/lifestyle/wp-content/uploads/sites/12/2018/08/shutterstock_619466837-1024x683.jpg"
           alt=""
         />
         <p>It is beautiful blog</p>
@@ -36,32 +36,16 @@ export default function Sidebar() {
       <div className="sidebarItem">
         <span className="sidebarTitle">FOLLOW US</span>
         <div className="sidebarSocial">
-          <a
-            href="https://twitter.com/envato"
-            class="social-link"
-            target="_blank"
-          >
+          <a href="https://twitter.com/envato" class="social-link">
             <i className="sidebarIcon fab fa-facebook-square"></i>
           </a>
-          <a
-            href="https://twitter.com/envato"
-            class="social-link"
-            target="_blank"
-          >
+          <a href="https://twitter.com/envato" class="social-link">
             <i className="sidebarIcon fab fa-twitter-square"></i>
           </a>
-          <a
-            href="https://twitter.com/envato"
-            class="social-link"
-            target="_blank"
-          >
+          <a href="https://twitter.com/envato" class="social-link">
             <i className="sidebarIcon fab fa-pinterest-square"></i>
           </a>
-          <a
-            href="https://twitter.com/envato"
-            class="social-link"
-            target="_blank"
-          >
+          <a href="https://twitter.com/envato" class="social-link">
             <i className="sidebarIcon fab fa-instagram-square"></i>
           </a>
         </div>
